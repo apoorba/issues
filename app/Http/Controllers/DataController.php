@@ -38,7 +38,7 @@ class DataController extends Controller
 
     public function showData(){
 
-        $data = FormData::with('comments')->get();
+        $data = FormData::with(['comments', 'images'])->paginate(10);
 
         return view('dashboard', compact('data'));
     }

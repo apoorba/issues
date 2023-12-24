@@ -49,6 +49,7 @@
 		<br><br>
 
 		<div class="add-comment-section">
+			
 		<form action="{{ route('comment.store') }}" method='POST'>
 		<input type='hidden' name='form_data_id' value="{{ $dataWithComments->id }}">
 

@@ -45,6 +45,7 @@
                     <th onclick="sortTable(0)">SN</th>
                     <th onclick='sortTable(1)'>Issue</th>
                     <th onclick='sortTable(2)'>Description</th>
+                    <th>Images</th>
                     <th onclick='sortTable(3)'>Priority</th>
                     <th onclick='sortTable(4)'>Department</th>
                     <th onclick='sortTable(5)'>Issued by</th>
@@ -59,6 +60,11 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->issue }}</td>
                     <td>{{ $item->description }}</td>
+                    <td> 
+                        @foreach ($item->images as $image)
+                        <img src="{{ Storage::url($image->image_name)}}" alt="Image">
+                        @endforeach
+                    </td>
                     <td>{{ $item->priority }}</td>
                     <td>{{ $item->department }}</td>
                     <td>{{ $item->issuedby }}</td>
@@ -70,6 +76,9 @@
             </tbody>
         </table>
     </div>
+
+    {{ $data->links() }}
+
     <script>
         var sortOrder ={};
     </script>
