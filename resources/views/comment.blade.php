@@ -48,7 +48,7 @@
 
 			@foreach($dataWithComments->comments as $comment)
 				
-					{{ $comment->user->name }} made a comment: {{ $comment->content }} <br><br>
+					{{ $comment->user->name }} comment: <b>{{ $comment->content }} </b><br><br>
 				
 			@endforeach
 		</ul>

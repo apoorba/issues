@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function showComments(FormData $formData){
+        
         $dataWithComments = FormData::with(['comments', 'images'])->find($formData->id);
         return view('comment', compact('dataWithComments'));
     }

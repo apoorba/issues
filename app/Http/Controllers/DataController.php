@@ -43,4 +43,12 @@ class DataController extends Controller
         return view('dashboard', compact('data'));
     }
 
+    public function search(Request $request){
+        $searchText = $request->input('searchText');
+
+        $filteredData = FormData::where('description', 'LIKE', '%'.$searchText.'%')->get();
+
+        return response()->json($filteredData);
+    }
+
 }

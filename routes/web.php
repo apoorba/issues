@@ -45,3 +45,5 @@ Route::get('/comment/{formData}', [CommentController::class, 'showComments'])->n
 
 Route::post('/comment/store', [CommentController::class, 'storeComment'])->name('comment.store');
 
+Route::post('/dashboard', [DataController::class, 'search'])->name('search');
+

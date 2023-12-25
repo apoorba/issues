@@ -146,3 +146,33 @@ function sortTable(columnIndex){
 }
 
 
+function searchTable(){
+    var searchText = document.getElementById('table-search').value;
+
+    fetch('/search',{
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+            'X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }, 
+        body: JSON.stringfy({ searchText: searchText })
+    })
+    .then(response=> response.json())
+    .then(data=>{
+        displaySearchResult(data);
+    })
+    .catch(error=> {
+        console.error('Error: ', error);
+    });
+}
+
+function displaySearchResult(){
+    
+    var searchResultContainer = document.getElementById('searchResult');
+    searchResultContainer.innerHTML='THIS IS THE RESULT';
+    data.forEach(item=>{
+        searchResultContainer.innerHTML += '<p>${item.description}</p>'
+    });
+}
+
+

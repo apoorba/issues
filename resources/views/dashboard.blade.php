@@ -31,7 +31,7 @@
         <form id="search-table" method="POST">
             @csrf
             <input type="text" id='table-search' placeholder="Search..." name="searchTable">
-            <button type="submit">Search</button>
+            <button type="submit" onclick="searchTable()">Search</button>
         </form>
     </div>
 
