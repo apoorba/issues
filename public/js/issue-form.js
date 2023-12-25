@@ -55,8 +55,6 @@ function submitFormData(event){
 }
 
 
-
-
 function addFileInput(){
     const fileInputs = document.getElementById('fileInputs');
 
@@ -87,15 +85,6 @@ function addFileInput(){
     fileInputs.appendChild(newFileRow);
 
     
-}
-
-
-
-
-
-function uploadFiles(){
-
-
 }
 
 

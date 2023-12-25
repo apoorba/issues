@@ -77,8 +77,11 @@
             </tbody>
         </table>
     </div>
+    <br><br>
 
-    {{ $data->links() }}
+    <div class="pagination">
+    {{ $data->links('vendor.pagination.tailwind') }}
+    </div>
 
     <script>
         var sortOrder ={};
