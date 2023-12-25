@@ -31,6 +31,10 @@
 		ID: {{ $dataWithComments->id }} <br>
 		Issue Type: {{ $dataWithComments->issue }} <br>
 		Description: {{ $dataWithComments-> description}} <br>
+		Images: @foreach ($dataWithComments->images as $image)
+				<a href="{{ Storage::url($image->image_name)}}" target='_blank'>View Image</a>
+				@endforeach
+		<br>
 		Priority: {{ $dataWithComments->priority }} <br>
 		Department: {{ $dataWithComments->department }} <br>
 		Issued By: {{ $dataWithComments->issuedby }} <br>
@@ -41,20 +45,23 @@
 		<div class='comments-list'>
 		<h4>Comments</h4>
 		<ul>
+
 			@foreach($dataWithComments->comments as $comment)
-			<li>{{ $comment->content }}</li>
+				
+					{{ $comment->user->name }} made a comment: {{ $comment->content }} <br><br>
+				
 			@endforeach
 		</ul>
 		</div>
 		<br><br>
 
 		<div class="add-comment-section">
-			
-		<form action="{{ route('comment.store') }}" method='POST'>
-		<input type='hidden' name='form_data_id' value="{{ $dataWithComments->id }}">
 
-		<label for="comment">Comment</label>
-		<textarea name='comment' rows='4' cols='50' placeholder="Write your comment..."></textarea>
+		<form action="{{ route('comment.store') }}" method='POST'>
+			@csrf
+		<input type='hidden' name='form_data_id' value="{{ $dataWithComments->id }}">
+		<input type='hidden' name='user_id' value='{{ auth()->id() }}'>	
+		<textarea name='comment' rows='8' cols='50' placeholder="Write your comment..."></textarea>
 		<br><br>
 		<input type='submit' value='Add comment'>
 		</form>

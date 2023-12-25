@@ -24,7 +24,7 @@ class DataController extends Controller
                 $imageName = $image->store('images','public');
                 $newImage = new Image();
                 $newImage->image_name = $imageName;
-                $newImage->description = $request->input('desciptions')[$key]??'';
+                $newImage->description = $request->input('descriptions')[$key]??'';
                 $newImage->form_data_id = $formData->id;
                 $newImage->save();
             }
@@ -38,7 +38,7 @@ class DataController extends Controller
 
     public function showData(){
 
-        $data = FormData::with(['comments', 'images'])->paginate(10);
+        $data = FormData::with(['comments', 'images'])->paginate(15);
 
         return view('dashboard', compact('data'));
     }

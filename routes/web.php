@@ -43,7 +43,5 @@ Route::post('/logout',[AuthenticatedSessionController::class, 'destroy'] ,functi
 
 Route::get('/comment/{formData}', [CommentController::class, 'showComments'])->name('comment');
 
-Route::post('/comment/store', [CommentController::class, 'storeComment'])
-    ->name('comment.store')
-    ->middleware('auth');
+Route::post('/comment/store', [CommentController::class, 'storeComment'])->name('comment.store');
 

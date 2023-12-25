@@ -62,7 +62,7 @@
                     <td>{{ $item->description }}</td>
                     <td> 
                         @foreach ($item->images as $image)
-                        <img src="{{ Storage::url($image->image_name)}}" alt="Image">
+                        <a href="{{ Storage::url($image->image_name)}}" target='_blank'>View Image</a>
                         @endforeach
                     </td>
                     <td>{{ $item->priority }}</td>
