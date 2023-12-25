@@ -35,7 +35,7 @@ class DataController extends Controller
         
 
         //return response()->json(['message' => 'Form data stored successfully']);
-        return redirect()->back()->with('success', 'Reported sucessfully');
+        return redirect()->back()->with('success', 'Reported Sucessfully');
 
         }catch(\Exception $e){
             return response()->json(['error'=>'An Error occured while processing data'], 500);

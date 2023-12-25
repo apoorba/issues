@@ -45,10 +45,7 @@
 			<div id="fileInputs">
 				<div class="fileRow">
 				Upload Image: 
-				<input type="file" id="images[]" multiple class="fileInput" accept="image/*">
-				<input type="text" id="descriptions[]" multiple placeholder="Image Description">
-				
-			<button type="button" onclick="addFileInput()">Add another File</button><br><br>
+				<button type="button" onclick="addFileInput()">Add File</button><br><br>
 				</div>
 			</div>
 			<!--<button type="button" onclick="uploadFiles()">Upload Files</button>		-->
@@ -69,17 +66,17 @@
 			</div>
 			<br><br>
 			<label for="department">Department: </label>
-			<input id="department" name="department" type="text">
+			<input id="department" name="department" type="text" required>
 			<br><br>
 			<label for="issuedby">Issued By: </label>
 			@if(auth()->check())
 			<input id="issuedby" type="text" placeholder="Your username" name="issuedby" value="{{ auth()->user()->name }}" readonly>
 			@else
-			<input id="issuedby" type="text" placeholder="Your username" name="issuedby">
+			<input id="issuedby" type="text" placeholder="Your username" name="issuedby" required>
 			@endif
 			<br><br>	
 
-            <input type="submit" value="Submit">            
+            <input type="submit" value="submit">            
 
         </form>
 

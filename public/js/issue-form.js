@@ -4,6 +4,15 @@ function showIssueForm(){
     
 }
 
+// document.addEventListener('DOMContentLoaded', function() {
+//     var reportForm = document.getElementById('report-form');
+//     if (reportForm) {
+//         reportForm.addEventListener('submit', submitFormData);
+//     } else {
+//         console.error('Form element with ID "report-form" not found');
+//     }
+// });
+
 function submitFormData(event){
     event.preventDefault();
     console.log('Form submission initiated');
@@ -13,46 +22,39 @@ function submitFormData(event){
     var department = document.getElementById('department').value.trim();
     var issuedby = document.getElementById('issuedby').value.trim();
 
-    if(issue==='' || priority==='' || department==='' || issuedby==='' || description===''){
+       
+    var formData = {
+        issue: issue,
+        description: description,
+        priority: priority,
+        department: department,
+        issuedby: issuedby
+    }   
 
-        alert("Please fill all the fields");
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    //console.log(csrfToken);
 
-    }else{    
-        var formData = {
-            issue: issue,
-            description: description,
-            priority: priority,
-            department: department,
-            issuedby: issuedby
-        }   
+    fetch('/submit-form', {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify(formData)
+        
+    })
+    .then(response=>response.json())
+    .then(data=>{
+        alert(data.message);
+        window.location.href='/';
+    })
+    .catch(error=>{
+        console.error('Error: ', error);
+    });
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-        fetch('/submit-form', {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type':'application/json',
-                'X-CSRF-TOKEN': csrfToken
-            }
-            
-        })
-        .then(response=>response.json())
-        .then(data=>{
-            alert(data.message);
-            window.location.href='/';
-        })
-        .catch(error=>{
-            console.error('Error: ', error);
-        });
-    
-    }
 }
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     var reportForm = document.getElementById('report-form');
-//     reportForm.addEventListener('submit', submitFormData);
-// });
+
 
 
 function addFileInput(){
@@ -74,7 +76,7 @@ function addFileInput(){
 
     const addButton = document.createElement('button');
     addButton.type = 'button';
-    addButton.textContent = 'Add another File';
+    addButton.textContent = 'Add File';
     addButton.addEventListener('click', addFileInput);
 
     newFileRow.appendChild(document.createTextNode('Upload Image: '));
@@ -199,7 +201,7 @@ function searchTableFunction(){
         tableContainer.style.display = 'block';
     }else{
         searchResultTable.style.display = 'block';
-        searchResultTable.style.border = '1';
+        searchResultTable.style.border = 1;
         tableContainer.style.display = 'none';
 
         searchResultTable.innerHTML = '';
