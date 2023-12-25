@@ -10,8 +10,9 @@ class DataController extends Controller
 {
     public function storeData(Request $request){
 
+       try{    
         $formData = new FormData();
-        $formData->issue = $request->input('issueType');
+        $formData->issue = $request->input('issue');
         $formData->description = $request->input('description');
         $formData->priority = $request->input('priority');
         $formData->department = $request->input('department');
@@ -22,7 +23,9 @@ class DataController extends Controller
         if($request->hasFile('images')){
             foreach($request->file('images') as $key=>$image){
                 $imageName = $image->store('images','public');
+
                 $newImage = new Image();
+
                 $newImage->image_name = $imageName;
                 $newImage->description = $request->input('descriptions')[$key]??'';
                 $newImage->form_data_id = $formData->id;
@@ -34,15 +37,19 @@ class DataController extends Controller
         //return response()->json(['message' => 'Form data stored successfully']);
         return redirect()->back()->with('success', 'Reported sucessfully');
 
+        }catch(\Exception $e){
+            return response()->json(['error'=>'An Error occured while processing data'], 500);
+        }
     }
 
     public function showData(){
 
-        $data = FormData::with(['comments', 'images'])->paginate(15);
+        $data = FormData::with(['comments', 'images'])->paginate(10);
 
         return view('dashboard', compact('data'));
     }
 
+    /*
     public function search(Request $request){
         $searchText = $request->input('searchText');
 
@@ -50,5 +57,6 @@ class DataController extends Controller
 
         return response()->json($filteredData);
     }
+    */
 
 }

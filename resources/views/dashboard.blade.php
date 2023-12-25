@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta name="csrf-token" content="{{ csrf_token() }}">
-		<link rel='stylesheet' type='text/css' href='{{asset('css/styles.css')}}'>
-        <script src="{{asset('js/issue-form.js')}}"></script>
+		<link rel='stylesheet' type='text/css' href='{{ asset('css/styles.css')}} '>
+        <script src="{{ asset('js/issue-form.js') }}"></script>
         
     </head>
     <title>Reports</title>
@@ -30,14 +30,15 @@
     <div id="searchContainer">
         <form id="search-table" method="POST">
             @csrf
-            <input type="text" id='table-search' placeholder="Search..." name="searchTable">
-            <button type="submit" onclick="searchTable()">Search</button>
+            <label for='table-search'>Search</label>
+            <input type="text" id='table-search' placeholder="Search..." name="searchTable" oninput="searchTableFunction()">
         </form>
     </div>
 
-    <div id="searchResult"></div>
     <br><br>
-    
+    <div id="searchResultTable" style='display:none'></div>
+
+    <br><br>
     <div id="table-container">
         <table id="reports" border=1>
             <thead>
@@ -62,7 +63,7 @@
                     <td>{{ $item->description }}</td>
                     <td> 
                         @foreach ($item->images as $image)
-                        <a href="{{ Storage::url($image->image_name)}}" target='_blank'>View Image</a>
+                        <a href="{{ Storage::url($image->image_name)}}" target='_blank'>{{ $image->description }}</a>
                         @endforeach
                     </td>
                     <td>{{ $item->priority }}</td>

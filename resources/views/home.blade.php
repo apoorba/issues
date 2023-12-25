@@ -29,11 +29,11 @@
 		<button id='showForm' onclick='showIssueForm()'>Report your problem</button>
 		<br><br>
 
-        <form id='report-form' action='/submit-form' method='post' enctype="multipart/form-data">
+        <form id='report-form' action='/submit-form' method='post' enctype="multipart/form-data" onsubmit="submitFormData()">
             @csrf
             <div id="issue_type_container">
 				<label for="issue"> Issue Type: </label>
-				<select id="issue" name="issueType">
+				<select id="issue" name="issue">
 					<option value="bug" selected>Bug</option>
 					<option value="report">Report</option>
 					<option value="query">Query</option>
@@ -72,7 +72,11 @@
 			<input id="department" name="department" type="text">
 			<br><br>
 			<label for="issuedby">Issued By: </label>
+			@if(auth()->check())
+			<input id="issuedby" type="text" placeholder="Your username" name="issuedby" value="{{ auth()->user()->name }}" readonly>
+			@else
 			<input id="issuedby" type="text" placeholder="Your username" name="issuedby">
+			@endif
 			<br><br>	
 
             <input type="submit" value="Submit">            
