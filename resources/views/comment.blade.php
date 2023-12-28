@@ -17,10 +17,10 @@
 				<x-logout/>
 				<br><br>
 			@else
-				<a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+				<a href="{{ route('login') }}" class="login-button">Log in</a>
 
 				@if (Route::has('register'))
-					<a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+					<a href="{{ route('register') }}" class="register button">Register</a>
 				@endif
 			@endauth
 		</div>
@@ -48,7 +48,7 @@
 
 			@foreach($dataWithComments->comments as $comment)
 				
-					{{ $comment->user->name }} comment: <b>{{ $comment->content }} </b><br><br>
+					{{ $comment->user->name }} comment:: <b>{{ $comment->content }} </b><br><br>
 				
 			@endforeach
 		</ul>
@@ -63,7 +63,13 @@
 		<input type='hidden' name='user_id' value='{{ auth()->id() }}'>	
 		<textarea name='comment' rows='8' cols='50' placeholder="Write your comment..."></textarea>
 		<br><br>
+		
+		@auth
 		<input type='submit' value='Add comment'>
+		@else
+		<a href="{{ route('login') }}" class="login-button">Log in to Comment</a>
+		@endauth		
+		
 		</form>
 		</div>
 

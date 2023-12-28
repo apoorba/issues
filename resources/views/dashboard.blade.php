@@ -27,6 +27,7 @@
 			@endauth
 		</div>
         <br><br>
+        
     <div id="searchContainer">
         <form id="search-table" method="POST">
             @csrf

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApoorbaController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DataController;
@@ -47,3 +48,5 @@ Route::post('/comment/store', [CommentController::class, 'storeComment'])->name(
 
 //Route::post('/dashboard', [DataController::class, 'search'])->name('search');
 
+
+Route::get('/apoorba', [ApoorbaController::class, 'view']);

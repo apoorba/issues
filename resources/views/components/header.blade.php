@@ -1,4 +1,4 @@
 <div class="heading">
-    <a href='/'>HOME</a>
-    <a href='/dashboard'>Dashboard</a>
+    <a href='/' class='home-page'>HOME</a>
+    <a href='/dashboard' class='dash-board'>Dashboard</a>
 </div>

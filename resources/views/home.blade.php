@@ -7,27 +7,30 @@
         <script src="{{asset('js/issue-form.js')}}"></script>
         
     </head>
+	
 	<x-header/>
 
 	
     <body>
 		<div class="logging">
 			@auth
-				<h3>Welcome {{ auth()->user()->name }}</h3>
+				<h3>Welcome </h3><h3 class='user-name'>{{ auth()->user()->name }}</h3>
 				<x-logout/>
 				<br><br>
 			@else
-				<a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+				<a href="{{ route('login') }}" class="login-button">Log in</a>
 
 				@if (Route::has('register'))
-					<a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+					<a href="{{ route('register') }}" class="register-button">Register</a>
 				@endif
 			@endauth
 		</div>
 		<br><br>
 
-		<button id='showForm' onclick='showIssueForm()'>Report your problem</button>
+		<div>
+		<button id='showForm' onclick='showIssueForm()' class='report-your-problem'>Report your problem</button>
 		<br><br>
+		</div>
 
         <form id='report-form' action='/submit-form' method='post' enctype="multipart/form-data" onsubmit="submitFormData()">
             @csrf
@@ -79,8 +82,6 @@
             <input type="submit" value="submit">            
 
         </form>
-
-		<a href="/dashboard"><h1>Reports Dashboard</h1></a>
 
 		@if(session('success'))
     	<script>

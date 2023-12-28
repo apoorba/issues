@@ -27,7 +27,7 @@ class DataController extends Controller
                 $newImage = new Image();
 
                 $newImage->image_name = $imageName;
-                $newImage->description = $request->input('descriptions')[$key]??'';
+                $newImage->description = $request->input('descriptions')[$key];
                 $newImage->form_data_id = $formData->id;
                 $newImage->save();
             }
