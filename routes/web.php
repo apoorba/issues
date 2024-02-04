@@ -18,9 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 });
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::post('/submitForm', [DataController::class, 'storeData']);
 
 Route::get('/comment', function () {
     return view('comment');
@@ -36,7 +42,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/dashboard', [DataController::class, 'showData']);
 
-Route::post('/submit-form', [DataController::class, 'storeData']);
+
 
 Route::post('/logout',[AuthenticatedSessionController::class, 'destroy'] ,function(){
     return view('home');
@@ -48,5 +54,4 @@ Route::post('/comment/store', [CommentController::class, 'storeComment'])->name(
 
 //Route::post('/dashboard', [DataController::class, 'search'])->name('search');
 
-
-Route::get('/apoorba', [ApoorbaController::class, 'view']);
+//Route::get('/apoorba', [ApoorbaController::class, 'view']);

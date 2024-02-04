@@ -10,6 +10,7 @@ class DataController extends Controller
 {
     public function storeData(Request $request){
 
+        
        try{    
         $formData = new FormData();
         $formData->issue = $request->input('issue');
@@ -19,23 +20,18 @@ class DataController extends Controller
         $formData->issuedby = $request->input('issuedby');
 
         $formData->save();
-
         if($request->hasFile('images')){
             foreach($request->file('images') as $key=>$image){
                 $imageName = $image->store('images','public');
 
                 $newImage = new Image();
-
                 $newImage->image_name = $imageName;
-                $newImage->description = $request->input('descriptions')[$key];
+                $newImage->description = $request->input('descriptions')[$key]??'';
                 $newImage->form_data_id = $formData->id;
                 $newImage->save();
             }
         }
-        
-
-        //return response()->json(['message' => 'Form data stored successfully']);
-        return redirect()->back()->with('success', 'Reported Sucessfully');
+        return response()->json(['success'=>"Reported sucessfully"]);
 
         }catch(\Exception $e){
             return response()->json(['error'=>'An Error occured while processing data'], 500);
@@ -44,7 +40,7 @@ class DataController extends Controller
 
     public function showData(){
 
-        $data = FormData::with(['comments', 'images'])->paginate(10);
+        $data = FormData::with(['comments', 'images'])->paginate(15);
 
         return view('dashboard', compact('data'));
     }

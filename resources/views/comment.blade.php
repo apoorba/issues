@@ -17,10 +17,10 @@
 				<x-logout/>
 				<br><br>
 			@else
-				<a href="{{ route('login') }}" class="login-button">Log in</a>
+				<a id='homeHead' href="{{ route('login') }}" class="login-button">Log in</a>
 
 				@if (Route::has('register'))
-					<a href="{{ route('register') }}" class="register button">Register</a>
+					<a id='homeHead' href="{{ route('register') }}" class="register button">Register</a>
 				@endif
 			@endauth
 		</div>

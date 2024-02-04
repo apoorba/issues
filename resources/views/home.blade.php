@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <h1>Report your issue</h1>
     <head>
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,70 +19,86 @@
 				<x-logout/>
 				<br><br>
 			@else
-				<a href="{{ route('login') }}" class="login-button">Log in</a>
+				<a id='homeHead' href="{{ route('login') }}" class="login-button">Log in</a>
 
 				@if (Route::has('register'))
-					<a href="{{ route('register') }}" class="register-button">Register</a>
+					<a id='homeHead' href="{{ route('register') }}" class="register-button">Register</a>
 				@endif
 			@endauth
 		</div>
 		<br><br>
 
-		<div>
-		<button id='showForm' onclick='showIssueForm()' class='report-your-problem'>Report your problem</button>
-		<br><br>
-		</div>
+	<button onclick="openForm()">Open Form</button>
+      
+    <div id="popup-form">
+       <div class="container">
 
-        <form id='report-form' action='/submit-form' method='post' enctype="multipart/form-data" onsubmit="submitFormData()">
+			<form id='report-form' method='post' enctype='multipart/form-data'>
             @csrf
-            <div id="issue_type_container">
-				<label for="issue"> Issue Type: </label>
-				<select id="issue" name="issue">
-					<option value="bug" selected>Bug</option>
-					<option value="report">Report</option>
-					<option value="query">Query</option>
-				</select><br><br>
-			</div>
-			<label for="description">Description: </label>
-			<textarea id="description" name="description" rows="10" cols="30" placeholder="Please describe your issue" maxlength="300"></textarea><br><br>
-            
-			<div id="fileInputs">
-				<div class="fileRow">
-				Upload Image: 
-				<button type="button" onclick="addFileInput()">Add File</button><br><br>
-				</div>
-			</div>
-			<!--<button type="button" onclick="uploadFiles()">Upload Files</button>		-->
-			<br><br>
+            <div class="labels">
+              <label for='issue'>Issue Type</label></div>
+            <div class="input-tab">
+                <input type="radio" name="issue" value="bug" required>Bug<br>
+                <input type="radio" name="issue" value="report">Report<br>
+                <input type="radio" name="issue" value="query">Query<br>
+            </div>
 
-			<div id="priority_type_container">
-			<label for="priority">Priority: </label>	
-					<select id="priority" name="priority">
-					<option value="highest">Highest</option>
-					<option value="high">High</option>
-					<option value="medium" selected>Medium</option>
-					<option value="low">Low</option>
-					<option value="lowest">Lowest</option>
-					<option value="mustHave">Must Have</option>
-					<option value="shouldHave">Should Have</option>
-					<option value="wantToHave">Want to Have</option>
-				</select>
-			</div>
-			<br><br>
-			<label for="department">Department: </label>
-			<input id="department" name="department" type="text" required>
-			<br><br>
-			<label for="issuedby">Issued By: </label>
-			@if(auth()->check())
-			<input id="issuedby" type="text" placeholder="Your username" name="issuedby" value="{{ auth()->user()->name }}" readonly>
+            <div class="labels">
+              <label for="description">Description</label></div>
+            <div class="input-tab">
+              <textarea class="input-field" id="description" name="description" rows="10" cols="40" placeholder="Describe your issue..."></textarea>
+            </div>
+
+            <div class="labels">
+              <label for="images">Upload Image</label>
+            </div>
+            <div class="btn">
+				<button id="fileInputs" onclick="addFileInput()">Add Image</button>
+				<div id='fileRow'>
+              
+				</div>	
+            </div>
+
+            <div class="labels">
+              <label for="priority">Priority</label></div>
+            <div class="input-tab">
+              <select id="priority" name="priority">
+                <option disabled value selected>Select an option</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+                <option value="mustHave">Must Have</option>
+                <option value="shouldHave">Should Have</option>
+              </select>
+              </div>
+
+
+             <div class="labels">
+              <label for="department">Department</label></div>
+            <div class="input-tab">
+              <input class="input-field" type="text" id="department" name="department" placeholder="Enter your department" required></div>
+    
+    
+             <div class="labels">
+              <label for="issuedby">Issued By</label></div>
+            <div class="input-tab">
+				@if(auth()->check())
+			<input class="input-field" id="issuedby" type="text" placeholder="Your username" name="issuedby" value="{{ auth()->user()->name }}" readonly>
 			@else
-			<input id="issuedby" type="text" placeholder="Your username" name="issuedby" required>
+			<input class="input-field" id="issuedby" type="text" placeholder="Your username" name="issuedby" required>
 			@endif
-			<br><br>	
+           
+            <div class="btn">
+              <button id="submit" type="button" onclick="submitFormData()">Submit</button>
+            </div>
+            
+            <div class="btn">
+               <button id="close" type="submit" onclick="closeForm()">Close</button>
+             </div>
 
-            <input type="submit" value="submit">            
-
-        </form>
+          </form>
+        </div>
+      </div>
 
 		@if(session('success'))
     	<script>

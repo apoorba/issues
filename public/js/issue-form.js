@@ -1,7 +1,9 @@
-function showIssueForm(){
-    var form = document.getElementById('report-form');
-    form.style.display = (form.style.display === 'block') ? 'none' : 'block';
-    
+function openForm(){
+    document.getElementById('popup-form').style.display = 'block';
+}
+
+function closeForm(){
+    document.getElementById('popup-form').style.display= 'none';
 }
 
 // document.addEventListener('DOMContentLoaded', function() {
@@ -14,49 +16,61 @@ function showIssueForm(){
 // });
 
 function submitFormData(event){
-    event.preventDefault();
-    console.log('Form submission initiated');
-    var issue = document.getElementById('issue').value.trim();
-    var description = document.getElementById('description').value.trim();
-    var priority = document.getElementById('priority').value.trim();
+    //event.preventDefault();
+
+    var issue = document.querySelector('input[name="issue"]:checked').value;
+    var description = document.getElementById('description').value;
+    var priority = document.getElementById('priority').value;
     var department = document.getElementById('department').value.trim();
     var issuedby = document.getElementById('issuedby').value.trim();
 
-       
-    var formData = {
-        issue: issue,
-        description: description,
-        priority: priority,
-        department: department,
-        issuedby: issuedby
-    }   
+    var formData = new FormData();
+    formData.append('issue', issue);
+    formData.append('description', description);
+    formData.append('priority', priority);
+    formData.append('department', department);
+    formData.append('issuedby', issuedby);
 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    //console.log(csrfToken);
-
-    fetch('/submit-form', {
+    var imageInputs = document.querySelectorAll('input[name="images[]"]');
+    var descriptionInputs = document.querySelectorAll('input[name="descriptions[]"]');
+    
+    for (var i = 0; i < imageInputs.length; i++) {
+        var file = imageInputs[i].files[0];
+        var description = descriptionInputs[i].value.trim();
+        
+        if (file) {
+            formData.append('images[]', file);
+            formData.append('descriptions[]', description);
+        }
+    }
+    
+    // Print FormData contents to console
+    console.log("FormData contents:");
+    for (var pair of formData.entries()) {
+    console.log(pair[0] + ': ' + pair[1]);
+    }
+    
+    fetch('/submitForm', {
         method: 'POST',
         headers: {
-            'Content-Type':'application/json',
-            'X-CSRF-TOKEN': csrfToken
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
-        body: JSON.stringify(formData)
-        
+        body: formData
     })
-    .then(response=>response.json())
-    .then(data=>{
-        alert(data.message);
-        window.location.href='/';
+    .then(response => response.json())
+    .then(data => {
+        alert("Form has been submitted Successfully");
+        window.location.href = '/';
     })
-    .catch(error=>{
+    .catch(error => {
         console.error('Error: ', error);
     });
-
 }
 
 
 function addFileInput(){
-    const fileInputs = document.getElementById('fileInputs');
+    
+    const fileInputs = document.getElementById('fileRow');
 
     const newFileRow = document.createElement('div');
     newFileRow.classList.add('fileRow');
@@ -83,9 +97,9 @@ function addFileInput(){
     newFileRow.appendChild(addButton);
 
     fileInputs.appendChild(newFileRow);
-
-    
 }
+
+
 
 
 function sortTable(columnIndex){
