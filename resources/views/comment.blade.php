@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-		<link rel='stylesheet' type='text/css' href='{{asset('css/styles.css')}}'>
-        <script src="{{asset('js/issue-form.js')}}"></script>
-        
-    </head>
-
-    <h1>Comment Section</h1>
-
-    <x-header/>
+@extends('layouts.app')
+@section('content')
 
     <div class="logging">
 			@auth
@@ -73,6 +63,4 @@
 		</form>
 		</div>
 
-	</body>
-
-</html>
+@endsection

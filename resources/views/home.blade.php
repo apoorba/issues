@@ -1,37 +1,10 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
+@section('title', 'Report your issue')
+@section('content')
 
-    <h1>Report your issue</h1>
-    <head>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-		<link rel='stylesheet' type='text/css' href='{{asset('css/styles.css')}}'>
-        <script src="{{asset('js/issue-form.js')}}"></script>
-        
-    </head>
-	
-	<x-header/>
+<script src="{{ asset('js/issue-form.js') }}"></script>
 
-	
-    <body>
-		<div class="logging">
-			@auth
-				<h3>Welcome </h3><h3 class='user-name'>{{ auth()->user()->name }}</h3>
-				<x-logout/>
-				<br><br>
-			@else
-				<a id='homeHead' href="{{ route('login') }}" class="login-button">Log in</a>
-
-				@if (Route::has('register'))
-					<a id='homeHead' href="{{ route('register') }}" class="register-button">Register</a>
-				@endif
-			@endauth
-		</div>
-		<br><br>
-
-	<button onclick="openForm()">Open Form</button>
-      
-    <div id="popup-form">
-       <div class="container">
+    <div class="container">
 
 			<form id='report-form' method='post' enctype='multipart/form-data'>
             @csrf
@@ -91,14 +64,9 @@
             <div class="btn">
               <button id="submit" type="button" onclick="submitFormData()">Submit</button>
             </div>
-            
-            <div class="btn">
-               <button id="close" type="submit" onclick="closeForm()">Close</button>
-             </div>
-
           </form>
-        </div>
       </div>
+      
 
 		@if(session('success'))
     	<script>
@@ -106,5 +74,4 @@
     	</script>
 		@endif
 
-    </body>
-</html>
+@endsection

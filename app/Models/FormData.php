@@ -12,7 +12,7 @@ class FormData extends Model
     protected $table = 'form_data';
 
     protected $fillable = [
-        'issue', 'description', 'priority', 'department', 'issuedby'
+        'issue', 'description', 'priority', 'department', 'issuedby', 'status',
     ];
 
     public function comments(){

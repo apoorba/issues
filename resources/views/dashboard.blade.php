@@ -1,33 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-		<link rel='stylesheet' type='text/css' href='{{ asset('css/styles.css')}} '>
-        <script src="{{ asset('js/issue-form.js') }}"></script>
-        
-    </head>
-    <title>Reports</title>
-    <h1>Reports Dashboard</h1>
+@extends('layouts.app')
+@section('title', 'Dashboard')
+@section('content')
 
-    <x-header/>
-    <br><br>
-    
-    <body>
-        <div class="logging">
-			@auth
-				<h3>Welcome {{ auth()->user()->name }}</h3>
-				<x-logout/>
-				<br><br>
-			@else
-				<a id='homeHead' href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+<script src="{{ asset('js/issue-form.js') }}"></script>
 
-				@if (Route::has('register'))
-					<a id='homeHead' href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-				@endif
-			@endauth
-		</div>
-        <br><br>
-        
     <div id="searchContainer">
         <form id="search-table" method="POST">
             @csrf
@@ -51,6 +27,7 @@
                     <th onclick='sortTable(3)'>Priority</th>
                     <th onclick='sortTable(4)'>Department</th>
                     <th onclick='sortTable(5)'>Issued by</th>
+                    <th>Status</th>
                     <th onclick='sortTable(6)'>Created at</th>
                     <th onclick='sortTable(7)'>Updated at</th>
                     <th>Comments</th>
@@ -70,9 +47,10 @@
                     <td>{{ $item->priority }}</td>
                     <td>{{ $item->department }}</td>
                     <td>{{ $item->issuedby }}</td>
+                    <td>{{ $item->status }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>{{ $item->updated_at }}</td>
-                    <td><a href='{{ route('comment', $item->id) }}'>View Comments</a></td>
+                    <td><a href='{{ route('comment', $item->id) }}'>View Details</a></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -81,11 +59,13 @@
     <br><br>
 
     <div class="pagination">
-    {{ $data->links('vendor.pagination.tailwind') }}
+    {{ $data->links() }}
     </div>
 
     <script>
         var sortOrder ={};
     </script>
-    </body>
-</html>
+
+@endsection
+
+

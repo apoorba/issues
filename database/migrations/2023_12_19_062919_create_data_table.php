@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('priority');
             $table->string('department');
             $table->string('issuedby');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }
