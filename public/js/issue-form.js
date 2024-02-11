@@ -1,4 +1,4 @@
-function openForm(){
+/*function openForm(){
     document.getElementById('popup-form').style.display = 'block';
 }
 
@@ -6,14 +6,15 @@ function closeForm(){
     document.getElementById('popup-form').style.display= 'none';
 }
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     var reportForm = document.getElementById('report-form');
-//     if (reportForm) {
-//         reportForm.addEventListener('submit', submitFormData);
-//     } else {
-//         console.error('Form element with ID "report-form" not found');
-//     }
-// });
+document.addEventListener('DOMContentLoaded', function() {
+    var reportForm = document.getElementById('report-form');
+    if (reportForm) {
+        reportForm.addEventListener('submit', submitFormData);
+    } else {
+        console.error('Form element with ID "report-form" not found');
+    }
+});
+*/
 
 function submitFormData(event){
     //event.preventDefault();
@@ -101,7 +102,7 @@ function addFileInput(){
 
 
 
-
+/*
 function sortTable(columnIndex){
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById('reports');
@@ -156,6 +157,7 @@ function sortTable(columnIndex){
     }
 
 }
+*/
 
 /*
 function searchTable(){
@@ -188,6 +190,7 @@ function displaySearchResult(){
 }
 */
 
+/*
 function searchTableFunction(){
     var searchText = document.getElementById('table-search').value.toLowerCase();
     const tableRows = document.querySelectorAll('#reports tbody tr');
@@ -227,3 +230,4 @@ function searchTableFunction(){
         }
     }
 }
+*/

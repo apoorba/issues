@@ -2,34 +2,22 @@
 @section('title', 'Dashboard')
 @section('content')
 
-<script src="{{ asset('js/issue-form.js') }}"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
 
-    <div id="searchContainer">
-        <form id="search-table" method="POST">
-            @csrf
-            <label for='table-search'>Search</label>
-            <input type="text" id='table-search' placeholder="Search..." name="searchTable" oninput="searchTableFunction()">
-        </form>
-    </div>
-
-    <br><br>
-    <div id="searchResultTable" style='display:none'></div>
-
-    <br><br>
-    <div id="table-container">
+    <div class="container mt-5">
         <table id="reports" border=1>
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)">SN</th>
-                    <th onclick='sortTable(1)'>Issue</th>
-                    <th onclick='sortTable(2)'>Description</th>
+                    <th>SN</th>
+                    <th>Issue</th>
+                    <th>Description</th>
                     <th>Images</th>
-                    <th onclick='sortTable(3)'>Priority</th>
-                    <th onclick='sortTable(4)'>Department</th>
-                    <th onclick='sortTable(5)'>Issued by</th>
+                    <th>Priority</th>
+                    <th>Department</th>
+                    <th>Issued by</th>
                     <th>Status</th>
-                    <th onclick='sortTable(6)'>Created at</th>
-                    <th onclick='sortTable(7)'>Updated at</th>
+                    <th>Created at</th>
+                    <th>Updated at</th>
                     <th>Comments</th>
                 </tr>
             </thead>
@@ -58,12 +46,14 @@
     </div>
     <br><br>
 
-    <div class="pagination">
-    {{ $data->links() }}
-    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
+    
     <script>
-        var sortOrder ={};
+        $(document).ready( function () {
+        $('#reports').DataTable();
+    } );
     </script>
 
 @endsection

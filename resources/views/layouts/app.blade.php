@@ -7,6 +7,10 @@
 
         <title>@yield('title')</title>
 
+        <!-- Data Table -->
+        <link rel='stylesheet' href='//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css'>
+        
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
