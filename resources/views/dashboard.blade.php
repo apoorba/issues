@@ -18,7 +18,7 @@
                     <th>Status</th>
                     <th>Created at</th>
                     <th>Updated at</th>
-                    <th>Comments</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                     <td>{{ $item->description }}</td>
                     <td> 
                         @foreach ($item->images as $image)
-                        <a href="{{ Storage::url($image->image_name)}}" target='_blank'>{{ $image->description }}</a>
+                        <a class="clickable" href="{{ Storage::url($image->image_name)}}" target='_blank'>{{ $image->description }}</a>
                         @endforeach
                     </td>
                     <td>{{ $item->priority }}</td>
@@ -38,7 +38,7 @@
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>{{ $item->updated_at }}</td>
-                    <td><a href='{{ route('comment', $item->id) }}'>View Details</a></td>
+                    <td><a  class="clickable" href='{{ route('comment', $item->id) }}'>View Details</a></td>
                 </tr>
                 @endforeach
             </tbody>

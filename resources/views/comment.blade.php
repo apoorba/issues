@@ -1,39 +1,29 @@
 @extends('layouts.app')
+@section('title', 'Details')
 @section('content')
 
-    <div class="logging">
-			@auth
-				<h3>Welcome {{ auth()->user()->name }}</h3>
-				<x-logout/>
-				<br><br>
-			@else
-				<a id='homeHead' href="{{ route('login') }}" class="login-button">Log in</a>
-
-				@if (Route::has('register'))
-					<a id='homeHead' href="{{ route('register') }}" class="register button">Register</a>
-				@endif
-			@endauth
-		</div>
-		<br><br>
-
-	<body>
+	
 		<div id='displayForComments'>
-		ID: {{ $dataWithComments->id }} <br>
+		<b>ID</b>: {{ $dataWithComments->id }} <br>
 		Issue Type: {{ $dataWithComments->issue }} <br>
 		Description: {{ $dataWithComments-> description}} <br>
 		Images: @foreach ($dataWithComments->images as $image)
-				<a href="{{ Storage::url($image->image_name)}}" target='_blank'>View Image</a>
+				<a class="clickable" href="{{ Storage::url($image->image_name)}}" target='_blank'>View Image</a>
 				@endforeach
 		<br>
 		Priority: {{ $dataWithComments->priority }} <br>
 		Department: {{ $dataWithComments->department }} <br>
 		Issued By: {{ $dataWithComments->issuedby }} <br>
+		Status: {{ $dataWithComments->status }} <br>
 		Created Date: {{ $dataWithComments->created_at }} <br>
-		Updated Date: {{ $dataWithComments->updated_at }} <br>
-		</div>
+		Updated Date: {{ $dataWithComments->updated_at }} <br><br>
+
+		<h4 class='commentsHeading'>Comments</h4>
+
+		
 
 		<div class='comments-list'>
-		<h4>Comments</h4>
+		
 		<ul>
 
 			@foreach($dataWithComments->comments as $comment)
@@ -57,10 +47,11 @@
 		@auth
 		<input type='submit' value='Add comment'>
 		@else
-		<a href="{{ route('login') }}" class="login-button">Log in to Comment</a>
+		<button><a href="{{ route('login') }}" class="login-button">Log in to Comment</a></button>
 		@endauth		
 		
 		</form>
 		</div>
+	</div>
 
 @endsection

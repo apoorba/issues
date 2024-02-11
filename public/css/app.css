@@ -1,0 +1,45 @@
+.form-container{
+    margin: auto;
+    width: 60%;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%; /* Adjust the width as needed for smaller screens */
+    }
+}
+
+h2.form { 
+    color: #111; 
+    font-family: 'Open Sans', sans-serif;
+    font-size: 40px; 
+    font-weight: 300; 
+    line-height: 32px; 
+    margin: 0 0 72px; 
+    text-align: center; 
+    padding-top: 1%;
+}
+
+#displayForComments{
+    margin: auto;
+    padding-left: 50px;
+}
+
+h4.commentsHeading{
+    font-size: 30px; 
+}
+
+a.clickable:link {
+    color: green;
+  }
+  
+  /* visited link */
+  a.clickable:visited {
+    color: blue;
+  }
+  
+  /* mouse over link */
+  a.clickable:hover {
+    color: hotpink;
+  }
+  

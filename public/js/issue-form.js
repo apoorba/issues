@@ -16,14 +16,55 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 */
 
+function addFileInput(){
+    
+    document.getElementById('fileInputs').style.display= 'none';
+
+    const fileInputs = document.getElementById('fileRow');
+
+    const newFileRow = document.createElement('div');
+    newFileRow.classList.add('fileRow');
+
+    const uploadInput = document.createElement('input');
+    uploadInput.type = 'file';
+    uploadInput.name = 'images[]';
+    uploadInput.classList.add('fileInput');
+    uploadInput.accept='images/*';
+
+    const descriptionInput = document.createElement('input');
+    descriptionInput.type = 'text';
+    descriptionInput.name = 'descriptions[]';
+    descriptionInput.placeholder = 'Image Description';
+
+    const addButton = document.createElement('button');
+    addButton.type = 'button';
+    addButton.textContent = 'Add File';
+    addButton.addEventListener('click', addFileInput);
+
+    newFileRow.appendChild(document.createTextNode('Upload Image: '));
+    newFileRow.appendChild(uploadInput);
+    newFileRow.appendChild(descriptionInput);
+    newFileRow.appendChild(addButton);
+
+    fileInputs.appendChild(newFileRow);
+}
+
 function submitFormData(event){
     //event.preventDefault();
+    console.log("Submit data function called");
+
+   
 
     var issue = document.querySelector('input[name="issue"]:checked').value;
     var description = document.getElementById('description').value;
     var priority = document.getElementById('priority').value;
     var department = document.getElementById('department').value.trim();
     var issuedby = document.getElementById('issuedby').value.trim();
+
+    if (!issue || !description || priority === 'Select an option' || !department || !issuedby) {
+        alert('Please fill in all fields');
+        return;
+    }
 
     var formData = new FormData();
     formData.append('issue', issue);
@@ -69,36 +110,7 @@ function submitFormData(event){
 }
 
 
-function addFileInput(){
-    
-    const fileInputs = document.getElementById('fileRow');
 
-    const newFileRow = document.createElement('div');
-    newFileRow.classList.add('fileRow');
-
-    const uploadInput = document.createElement('input');
-    uploadInput.type = 'file';
-    uploadInput.name = 'images[]';
-    uploadInput.classList.add('fileInput');
-    uploadInput.accept='images/*';
-
-    const descriptionInput = document.createElement('input');
-    descriptionInput.type = 'text';
-    descriptionInput.name = 'descriptions[]';
-    descriptionInput.placeholder = 'Image Description';
-
-    const addButton = document.createElement('button');
-    addButton.type = 'button';
-    addButton.textContent = 'Add File';
-    addButton.addEventListener('click', addFileInput);
-
-    newFileRow.appendChild(document.createTextNode('Upload Image: '));
-    newFileRow.appendChild(uploadInput);
-    newFileRow.appendChild(descriptionInput);
-    newFileRow.appendChild(addButton);
-
-    fileInputs.appendChild(newFileRow);
-}
 
 
 
