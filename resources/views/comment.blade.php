@@ -18,9 +18,13 @@
 		Created Date: {{ $dataWithComments->created_at }} <br>
 		Updated Date: {{ $dataWithComments->updated_at }} <br><br>
 
-		<h4 class='commentsHeading'>Comments</h4>
+		<div>
+			<button id="accept_ticket" class="btn btn-primary">Accept Issue</button>
+		</div>
 
-		
+		<br>
+
+		<h4 class='commentsHeading'>Comments</h4>
 
 		<div class='comments-list'>
 		
@@ -35,6 +39,8 @@
 		</div>
 		<br><br>
 
+		
+
 		<div class="add-comment-section">
 
 		<form action="{{ route('comment.store') }}" method='POST'>
@@ -47,11 +53,16 @@
 		@auth
 		<input type='submit' value='Add comment'>
 		@else
-		<button><a href="{{ route('login') }}" class="login-button">Log in to Comment</a></button>
+		<button class="btn btn-secondary"><a href="{{ route('login') }}" class="login-button">Log in to Comment</a></button>
 		@endauth		
 		
 		</form>
+
+		
+
 		</div>
+
+		
 	</div>
 
 @endsection

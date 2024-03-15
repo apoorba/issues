@@ -5,7 +5,7 @@
 
 <script src="{{ asset('js/issue-form.js') }}"></script>
 
-  <h2 class='form'>Form</h2>
+  <h2 class='form'>Report Your Issue</h2>
 
     <div class="form-container">
 
@@ -13,14 +13,14 @@
             @csrf
             <div class="labels">
               <label for='issue'><b>Issue Type</b></label></div>
-            <div class="input-tab">
-                <input type="radio" name="issue" value="bug" required>Bug<br>
-                <input type="radio" name="issue" value="report">Report<br>
-                <input type="radio" name="issue" value="query">Query<br>
+            <div class="mb-3 form-check">
+                <input type="radio" name="issue" value="bug" required> Bug <br>
+                <input type="radio" name="issue" value="report"> Report <br>
+                <input type="radio" name="issue" value="query"> Query <br>
             </div>
             <br>
 
-            <div class="labels">
+            <div class="mb-3">
               <label for="description"><b>Description</b></label></div>
             <div class="input-tab">
               <textarea class="input-field" id="description" name="description" rows="10" cols="40" placeholder="Describe your issue..."></textarea>

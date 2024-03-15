@@ -5,7 +5,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
 
     <div class="container mt-5">
-        <table id="reports" border=1>
+        <table id="reports" class="table table-striped">
             <thead>
                 <tr>
                     <th>SN</th>
