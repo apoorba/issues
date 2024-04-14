@@ -111,9 +111,6 @@ function submitFormData(event){
 
 
 
-
-
-
 /*
 function sortTable(columnIndex){
     var table, rows, switching, i, x, y, shouldSwitch;

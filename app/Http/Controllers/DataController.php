@@ -19,6 +19,7 @@ class DataController extends Controller
         $formData->department = $request->input('department');
         $formData->issuedby = $request->input('issuedby');
         $formData->status = 'Pending';
+        $formData->updated_by = null;
 
         $formData->save();
         if($request->hasFile('images')){

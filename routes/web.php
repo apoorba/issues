@@ -52,6 +52,10 @@ Route::get('/comment/{formData}', [CommentController::class, 'showComments'])->n
 
 Route::post('/comment/store', [CommentController::class, 'storeComment'])->name('comment.store');
 
+Route::put('/comment/{id}/accept', [CommentController::class, 'acceptIssue'])->name('comment.accept')->middleware('auth');
+
+Route::put('/comment/{id}/solve', [CommentController::class, 'solveIssue'])->name('comment.solve');
+
 //Route::post('/dashboard', [DataController::class, 'search'])->name('search');
 
 //Route::get('/apoorba', [ApoorbaController::class, 'view']);
